@@ -1,5 +1,7 @@
 # Reveal.js generator
 
+[![Build Status](https://travis-ci.org/jledentu/generator-reveal.svg?branch=master)](https://travis-ci.org/jledentu/generator-reveal)
+
 > Yeoman generator for creating presentations using reveal.js and Webpack.
 
 ## Usage
@@ -41,3 +43,7 @@ To add a new slide in the presentation, create a new file in `src/public/slides`
 ```
 
 For more information, see [https://github.com/hakimel/reveal.js](https://github.com/hakimel/reveal.js).
+
+## License
+
+[MIT](https://opensource.org/licenses/mit-license.php)
