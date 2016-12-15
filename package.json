@@ -1,0 +1,43 @@
+{
+  "name": "@jledentu/reveal",
+  "version": "0.0.1",
+  "description": "Yeoman generator for creating reveal.js presentations",
+  "keywords": [
+    "yeoman-generator",
+    "reveal",
+    "slides",
+    "webpack"
+  ],
+  "license": "MIT",
+  "author": "Jérémie Ledentu <jledentu@gmail.com>",
+  "contributors": [
+    "Jérémie Ledentu <jledentu@gmail.com>"
+  ],
+  "files": [
+    "generators/app"
+  ],
+  "main": "generators/app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jledentu/generator-reveal.git"
+  },
+  "scripts": {
+    "test": "npm run lint && mocha",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "underscore.string": "^3.3.4",
+    "yeoman-generator": "^0.24.1",
+    "yosay": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "~3.7.1",
+    "mocha": "^3.1.0",
+    "yeoman-assert": "^2.2.1",
+    "yeoman-test": "^1.5.1"
+  },
+  "engines": {
+    "node": ">=4.6.0"
+  }
+}
