@@ -1,5 +1,5 @@
 {
-  "name": "@jledentu/reveal",
+  "name": "@jledentu/generator-reveal",
   "version": "0.0.1",
   "description": "Yeoman generator for creating reveal.js presentations",
   "keywords": [
