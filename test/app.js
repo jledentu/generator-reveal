@@ -42,7 +42,7 @@ describe('app', () => {
     });
 
     it('should generate slides files', () => {
-      assert.file('src/slides/title.md');
+      assert.file('src/public/slides/title.md');
     });
   });
 
