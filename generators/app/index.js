@@ -74,6 +74,12 @@ module.exports = class AppGenerator extends Base {
       this.destinationPath('package.json'),
       this.props
     );
+
+    this.fs.copyTpl(
+      this.templatePath('_gitignore'),
+      this.destinationPath('.gitignore'),
+      this.props
+    );
   }
 
   /**

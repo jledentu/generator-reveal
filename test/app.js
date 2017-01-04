@@ -21,6 +21,10 @@ describe('app', () => {
       assert.file('package.json');
     });
 
+    it('should generate .gitignore file', () => {
+      assert.file('.gitignore');
+    });
+
     it('should generate webpack.config.js file', () => {
       assert.file('webpack.config.js');
     });
