@@ -2,14 +2,14 @@
 
 const _ = require('underscore.string');
 const path = require('path');
-const Base = require('yeoman-generator').Base;
+const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 const chalk = require('chalk');
 
 const write = require('./write');
 const pkg = require('../../package.json');
 
-module.exports = class AppGenerator extends Base {
+module.exports = class AppGenerator extends Generator {
 
   /**
    * Constructor.
