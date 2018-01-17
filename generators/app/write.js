@@ -1,41 +1,36 @@
 'use strict';
 
 /**
+ * Copy a file or directory.
+ *
+ * @param {Object} generator Yeoman generator
+ * @param {String} filename  Name of the file
+ */
+function _copy (generator, filename) {
+  generator.fs.copyTpl(
+    generator.templatePath(filename),
+    generator.destinationPath(filename),
+    generator.props
+  );
+}
+
+/**
  * This class manages App Generator writings.
  */
 module.exports = {
 
   /**
-   * Write webpack.config.js.
+   * Write configuration files.
    */
-  webpack () {
-    this.fs.copyTpl(
-      this.templatePath('webpack.config.js'),
-      this.destinationPath('webpack.config.js'),
-      this.props
-    );
+  configFiles () {
+    _copy(this, 'webpack.config.js');
   },
 
   /**
-   * Write scripts directory.
+   * Write directories.
    */
-  scripts () {
-    this.fs.copyTpl(
-      this.templatePath('scripts'),
-      this.destinationPath('scripts'),
-      this.props
-    );
-  },
-
-  /**
-   * Write src directory.
-   */
-  src () {
-    this.fs.copyTpl(
-      this.templatePath('src'),
-      this.destinationPath('src'),
-      this.props
-    );
+  directories () {
+    _copy(this, 'scripts');
+    _copy(this, 'src');
   }
-
 };
