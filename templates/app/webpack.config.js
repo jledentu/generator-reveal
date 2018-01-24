@@ -1,15 +1,16 @@
-var webpack           = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**
  * Env
  * Get npm lifecycle event to identify the environment
  */
-var ENV = process.env.npm_lifecycle_event;
-var isTest = ENV === 'test';
-var isProd = ENV === 'build';
+const ENV = process.env.npm_lifecycle_event;
+const isTest = ENV === 'test';
+const isProd = ENV === 'build';
 
 /**
  * Add `module` property in Webpack configuration.
@@ -21,22 +22,31 @@ function addModuleConfig(webpackConfig) {
   return {
     ...webpackConfig,
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.scss$/,
-          loaders: ['style', 'css', 'sass']
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [path.resolve(__dirname, 'src/scss')],
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,
-          loaders: ['style', 'css']
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.(eot|svg|ttf|woff|woff2)$/,
-          loader: 'file?name=[name].[ext]'
-        }
-      ]
-    }
-  }
+          loader: 'file-loader?name=[name].[ext]',
+        },
+      ],
+    },
+  };
 }
 
 /**
@@ -49,14 +59,10 @@ function addProdPlugins(webpackConfig) {
   return {
     ...webpackConfig,
     plugins: [
-      ...webpackConfi.plugins,
+      ...webpackConfig.plugins,
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
       // Only emit files when there are no errors
-      new webpack.NoErrorsPlugin(),
-
-      // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
-      // Dedupe modules in the output
-      new webpack.optimize.DedupePlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
 
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
@@ -64,15 +70,16 @@ function addProdPlugins(webpackConfig) {
 
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
-      new CopyWebpackPlugin([{
-        from: __dirname + '/src/public'
-      }])
-    ]
+      new CopyWebpackPlugin([
+        {
+          from: __dirname + '/src/public',
+        },
+      ]),
+    ],
   };
 }
 
-module.exports = function makeWebpackConfig () {
-
+module.exports = (function makeWebpackConfig() {
   let config = {};
 
   /**
@@ -81,7 +88,7 @@ module.exports = function makeWebpackConfig () {
    * Should be an empty object if it's generating a test build
    * Karma will set this when it's a test build
    */
-  config.entry = ['./src/js/main.js'];
+  config.entry = './src/js/main.js';
 
   /**
    * Output
@@ -90,15 +97,11 @@ module.exports = function makeWebpackConfig () {
    * Karma will handle setting it up for you when it's a test build
    */
   config.output = {
-    path: __dirname + '/dist',
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   };
 
   config = addModuleConfig(config);
-
-  config.sassLoader = {
-    includePaths: [__dirname + '/src/scss']
-  };
 
   /**
    * Plugins
@@ -115,13 +118,13 @@ module.exports = function makeWebpackConfig () {
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       // Render index.html
       new HtmlWebpackPlugin({
-        template: __dirname + '/src/index.ejs'
+        template: __dirname + '/src/index.ejs',
       }),
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Extract css files
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin('[name].[hash].css', {disable: !isProd})
-    )
+      new ExtractTextPlugin('[name].[hash].css', { disable: !isProd }),
+    );
   }
 
   // Add build specific plugins
@@ -136,8 +139,8 @@ module.exports = function makeWebpackConfig () {
    */
   config.devServer = {
     contentBase: './src/public',
-    stats: 'minimal'
+    stats: 'minimal',
   };
 
   return config;
-}();
+})();
