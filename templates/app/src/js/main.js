@@ -7,7 +7,6 @@ require('reveal.js/css/theme/white.css');
 
 if (window.location.search.match(/print-pdf/gi)) {
   require('reveal.js/css/print/pdf.css');
-  console.log('PDF');
 } else {
   require('reveal.js/css/print/paper.css');
 }
