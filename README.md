@@ -1,6 +1,7 @@
 # Reveal.js generator
 
 [![Build Status](https://travis-ci.org/jledentu/generator-reveal.svg?branch=master)](https://travis-ci.org/jledentu/generator-reveal)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ace0825b34b9b8a19bdf/maintainability)](https://codeclimate.com/github/jledentu/generator-reveal/maintainability)
 
 > Yeoman generator for creating presentations using reveal.js and Webpack.
 
