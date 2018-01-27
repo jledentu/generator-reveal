@@ -1,6 +1,6 @@
 {
   "name": "@jledentu/generator-reveal",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Yeoman generator for creating presentations using reveal.js and Webpack",
   "keywords": [
     "yeoman-generator",
