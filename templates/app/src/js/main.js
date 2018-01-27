@@ -5,11 +5,10 @@ require('reveal.js/lib/js/classList.js');
 require('../scss/main.scss');
 require('reveal.js/css/theme/white.css');
 
-if (window.location.search.match( /print-pdf/gi )) {
-	require('reveal.js/css/print/pdf.css');
-	console.log('PDF');
+if (window.location.search.match(/print-pdf/gi)) {
+  require('reveal.js/css/print/pdf.css');
 } else {
-	require('reveal.js/css/print/paper.css');
+  require('reveal.js/css/print/paper.css');
 }
 
 // Slides
@@ -17,7 +16,7 @@ if (window.location.search.match( /print-pdf/gi )) {
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);
 }
-requireAll(require.context('raw!../public/slides', true));
+requireAll(require.context('raw-loader!../public/slides', true));
 
 window.Reveal = require('reveal.js');
 
@@ -26,16 +25,16 @@ require('reveal.js/plugin/markdown/marked.js');
 require('reveal.js/plugin/markdown/markdown.js');
 
 Reveal.initialize({
-	controls: true,
-	progress: true,
-	history: true,
-	center: true,
-	transition: 'slide', // none/fade/slide/convex/concave/zoom
-	slideNumber: true
+  controls: true,
+  progress: true,
+  history: true,
+  center: true,
+  transition: 'slide', // none/fade/slide/convex/concave/zoom
+  slideNumber: true,
 });
 
 require.ensure([], function(require) {
   require('reveal.js/plugin/zoom-js/zoom.js');
-	require('reveal.js/plugin/notes/notes.js');
-	require('reveal.js/plugin/math/math.js');
+  require('reveal.js/plugin/notes/notes.js');
+  require('reveal.js/plugin/math/math.js');
 });
