@@ -22,7 +22,7 @@
     "url": "https://github.com/jledentu/generator-reveal.git"
   },
   "scripts": {
-    "test": "npm run lint && mocha",
+    "test": "npm run lint && nyc --reporter=lcov mocha",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -34,6 +34,7 @@
   "devDependencies": {
     "eslint": "^4.15.0",
     "mocha": "^4.1.0",
+    "nyc": "^11.4.1",
     "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.5.1"
   },
